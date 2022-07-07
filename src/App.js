@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import {useState} from "react";
+import store from "./store/store";
+import {BrowserRouter as Router, Route, Switch, Redirect, Link} from 'react-router-dom'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Loginpage from "./pages/Loginpage";
+import TemplatePlanner from "./pages/CourseTemplatePlanner";
+import InputPlanner from "./pages/InputPlanner/InputPlanner";
+
+export default function App() {
+    const [authenticationStatus, setAuthenticationStatus] = useState(store.getState())
+
+    return (
+        <Container maxWidth="xl">
+            <Box sx={{my: 4}}>
+                <Router forceRefresh={true}>
+                    {authenticationStatus.authenticationRole !== false
+                        ?
+                        <div className='OutContainer'>
+                            <Switch>
+                                <Route exact path="/">
+                                    <Loginpage />
+                                </Route>
+                                <Route exact path="/TemplatePlanner">
+                                    <TemplatePlanner />
+                                </Route>
+                                <Route exact path="/InputPlanner">
+                                    <InputPlanner />
+                                </Route>
+                            </Switch>
+                        </div>
+                        :
+                        <Loginpage/>
+                    }
+                </Router>
+            </Box>
+        </Container>
+    );
 }
-
-export default App;
