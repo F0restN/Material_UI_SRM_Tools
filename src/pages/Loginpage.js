@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {useHistory, withRouter} from 'react-router-dom';
 import {CONFIG} from "../ENV";
-import {Button, TextField} from "@mui/material";
+import {Button, Container, Divider, Grid, Stack, TextField, Typography} from "@mui/material";
+import LoginIcon from '@mui/icons-material/Login';
 import Box from "@mui/material/Box";
 
 function Loginpage({authenticationStatus, setAuthenticationStatus}) {
@@ -58,47 +59,47 @@ function Loginpage({authenticationStatus, setAuthenticationStatus}) {
     }
 
     return (
-
-        <Box
-            component="form"
-            sx={{
-                '& .MuiTextField-root': {m: 1.2, width: '25ch'},
-            }}
-            noValidate
-            autoComplete="off"
-        >
-            <div>
-                <TextField
-                    label="Username"
-                    type="email"
-                    placeholder="Enter email address here"
-                    onChange={e => setLogInfo({
-                        ...logInfo,
-                        identifier: e.target.value
-                    })}
-                    value={logInfo.identifier}
-                />
-            </div>
-            <div>
-                <TextField
-                    label="Password"
-                    type="password"
-                    placeholder="Enter email address here"
-                    onChange={e => setLogInfo({
-                        ...logInfo,
-                        password: e.target.value
-                    })}
-                    value={logInfo.password}
-                />
-            </div>
-            <div>
-                <Button variant="contained" onClick={authenticate}>
-                    Sign in
-                </Button>
-            </div>
-        </Box>
-
-
+        <Grid container spacing={0} alignItems="center" justifyContent="center">
+            <Stack spacing={2} sx={{width: '50ch'}}>
+                <Grid container alignItems="center" justifyContent="center" sx={{mb: 2}}>
+                    <Typography variant="h4" component="h4">
+                        SRM DEV TOOLS
+                    </Typography>
+                </Grid>
+                <Grid>
+                    <TextField
+                        fullWidth
+                        label="Username"
+                        type="email"
+                        placeholder="Enter email address here"
+                        onChange={e => setLogInfo({
+                            ...logInfo,
+                            identifier: e.target.value
+                        })}
+                        value={logInfo.identifier}
+                    />
+                </Grid>
+                <Grid>
+                    <TextField
+                        fullWidth
+                        label="Password"
+                        type="password"
+                        placeholder="Enter email address here"
+                        onChange={e => setLogInfo({
+                            ...logInfo,
+                            password: e.target.value
+                        })}
+                        value={logInfo.password}
+                    />
+                </Grid>
+                <Divider />
+                <Grid>
+                    <Button sx={{width: '66ch'}} variant="contained" onClick={authenticate} endIcon={<LoginIcon />}>
+                        Sign Up
+                    </Button>
+                </Grid>
+            </Stack>
+        </Grid>
     )
 }
 
